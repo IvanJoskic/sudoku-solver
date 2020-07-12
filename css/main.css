@@ -1,0 +1,38 @@
+.main-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.button {
+  background-color: red;
+  border-radius: 6px;
+  width: fit-content;
+  padding: 5px;
+  margin: 10px 0px;
+  border: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color: blue;
+}
+
+.font {
+  font-size: 20px;
+}
+
+table, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  height: 2em;
+  width: 2em;
+}
+
+td:hover {
+  background-color: gray;
+}

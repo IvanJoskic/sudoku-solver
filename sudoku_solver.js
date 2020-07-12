@@ -11,8 +11,9 @@ var sudokuField = [
   [0,0,0, 9,0,5, 0,8,1],
   [0,0,0, 0,6,0, 2,4,0],
 ];
+
 let k = 0;
-function solveSudoku(sudokuField, i, j) {
+function solveSudoku(i, j) {
   //console.log(k++);
 
   if(i >= 9 || j >= 9)
@@ -20,9 +21,9 @@ function solveSudoku(sudokuField, i, j) {
 
   if (sudokuField[i][j] !== 0) {
     if (j + 1 >= 9) {
-      return solveSudoku(sudokuField, i + 1, 0);
+      return solveSudoku(i + 1, 0);
     } else {
-      return solveSudoku(sudokuField, i, j + 1);
+      return solveSudoku(i, j + 1);
     }
 
   }
@@ -33,17 +34,17 @@ function solveSudoku(sudokuField, i, j) {
     }
 
     sudokuField[i][j] = number;
-    //console.log('Trying ' + number + ' at (' + i + ', ' + j + ')');
+    //console.log(`Trying ${number} at (${i}, ${j})`);
     if(j + 1 <= 8) {
-      solveSudoku(sudokuField, i, j + 1);
+      solveSudoku(i, j + 1);
     } else {
       if(i + 1 <= 8) {
-        solveSudoku(sudokuField, i + 1, 0);
+        solveSudoku(i + 1, 0);
       } else {
         k = 1;
       }
     }
-    //console.log('Removing ' + number + ' from (' + i + ', ' + j + ')\n')
+    //console.log(`Removing  ${number}  from (${i}, ${j})`);
     if (k !== 1)
       sudokuField[i][j] = 0;
   }
@@ -77,6 +78,7 @@ function checkCube(number, row, column) {
       break;
   }
 
+
   let mX = cubeX + 3;
   let mY = cubeY + 3;
   for (; cubeX < mX; cubeX++) {
@@ -102,5 +104,8 @@ function findViolations(number, row, column) {
 };
 
 console.log('Starting postion:', sudokuField)
-solveSudoku(sudokuField, 0, 0);
+solveSudoku(0, 0);
 console.log('Solved:', sudokuField);
+
+exports.solveSudoku = solveSudoku;
+exports.sudokuField = sudokuField;
