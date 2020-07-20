@@ -8,9 +8,12 @@
 <body style="text-align: center">
   <h1>Sudoku solver</h1>
   <div class="main-body">
-    <button class="button font">
+    <button class="button font" onclick="sorry()">
       Generate sudoku
     </button>
+    <div class="sorry">
+      <p>Sorry, not yet implemented.</p>
+    </div>
     <button class="button font" onclick='solve()'>
       Solve it!
     </button>
@@ -79,15 +82,68 @@
       }
     }
 
+    function displaySudokuSolved(sudokuField2) {
+      const sudokuTable = document.getElementById('sudoku');
+      if(sudokuTable.hasChildNodes()) {
+        sudokuTable.innerHTML = '';
+      }
+
+      for(let i = 0; i < 9; i++) {
+        const tableRow = document.createElement('tr');
+        tableRow.id = i;
+
+        for(let j = 0; j < 9; j++) {
+          const tableData = document.createElement('td');
+          tableData.id = '' + i + j;
+          tableData.style.fontWeight = 'bold';
+
+          if(i == 2 || i == 5) {
+            //tableData.style = 'border-bottom: 2px solid black;';
+            tableData.style.borderBottom = '2px solid black';
+          }
+
+          if(j == 2 || j == 5) {
+            if(i == 2 || i == 5) {
+              //tableData.style = 'border-bottom: 2px solid black; border-right: 2px solid black';
+              tableData.style.borderBottom = '2px solid black';
+              tableData.style.borderRight = '2px solid black';
+            } else {
+              //tableData.style = 'font-weight: bold; border-right: 2px solid black';
+              tableData.style.borderRight = '2px solid black';
+            }
+          }
+
+          if(sudokuField2[i][j] !== 0) {
+            if(sudokuField2[i][j] !== sudokuField3[i][j]) {
+              tableData.style.fontWeight = 'normal';
+            }
+            tableData.innerText = sudokuField2[i][j];
+          }
+          tableRow.appendChild(tableData);
+        }
+        sudokuTable.appendChild(tableRow);
+      }
+    }
+
     displaySudoku(sudokuField3);
 
     function solve() {
       solver.solveSudoku(0, 0);
-      displaySudoku(solver.sudokuField);
+      displaySudokuSolved(solver.sudokuField);
     }
 
     function clearSudoku() {
       displaySudoku(sudokuField3);
+    }
+
+    function sorry() {
+      const element = document.getElementsByClassName('sorry');
+      element[0].style = 'display: block;';
+
+      setTimeout(() => {
+        const element = document.getElementsByClassName('sorry');
+        element[0].style = 'display: none;';
+      }, 3000);
     }
 
   </script>

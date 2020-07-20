@@ -36,3 +36,9 @@ td {
 td:hover {
   background-color: gray;
 }
+
+.sorry {
+  display: none;
+  position: relative;
+  z-index: 1;
+}

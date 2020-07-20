@@ -9,7 +9,7 @@ var sudokuField = [
 
   [0,0,0, 0,0,1, 0,0,3],
   [0,0,0, 9,0,5, 0,8,1],
-  [0,0,0, 0,6,0, 2,4,0],
+  [0,0,0, 0,6,0, 2,4,0]
 ];
 
 let k = 0;
@@ -50,6 +50,12 @@ function solveSudoku(i, j) {
   }
 };
 
+/**
+ * Checks if the number is not in the 3x3 cube.
+ * @param {*} number to be tested
+ * @param {*} row index of the location
+ * @param {*} column index of the location
+ */
 function checkCube(number, row, column) {
   let cubeX, cubeY;
   if (row < 3) {
@@ -79,7 +85,7 @@ function checkCube(number, row, column) {
   }
 
 
-  let mX = cubeX + 3;
+  let mX = cubeX + 3; //last indexes of cube
   let mY = cubeY + 3;
   for (; cubeX < mX; cubeX++) {
     for(; cubeY < mY; cubeY++) {
@@ -90,6 +96,12 @@ function checkCube(number, row, column) {
   return false;
 };
 
+/**
+ * Finds any violations in the horizonatal, vertical lines and the cube.
+ * @param {*} number to be tested
+ * @param {*} row index of the location
+ * @param {*} column index of the location
+ */
 function findViolations(number, row, column) {
   for(let j = 0; j < 9; j++) {
     if (sudokuField[row][j] === number)
