@@ -4,5 +4,8 @@
   "main": "window-test.js",
   "scripts": {
     "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^13.1.8"
   }
 }
