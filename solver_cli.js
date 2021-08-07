@@ -40,7 +40,7 @@ function solveHelper(sudoku, xCord, yCord) {
 
 	var solution;
 	for (var i = 1; i <= 9; i++) {
-		if (checkFieldCandidateCorectness(sudoku, xCord, yCord, i)) {
+		if (checkFieldCandidateCorrectness(sudoku, xCord, yCord, i)) {
 			sudoku[xCord][yCord] = i;
 			if (xCord == 8 && yCord == 8) {
 				return sudoku;
