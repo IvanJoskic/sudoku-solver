@@ -76,13 +76,8 @@ function solveHelper(sudoku, xCord, yCord) {
  * @returns 
  */
 function checkFieldCandidateCorrectness(sudoku, xCord, yCord, candidate) {
-	if (
-		!checkRow(sudoku, xCord, yCord, candidate) || !checkColumn(sudoku, xCord, yCord, candidate)
-		|| !checkSquare(sudoku, xCord, yCord, candidate)
-	) {
-		return false;
-	} 
-	return true;
+	return checkRow(sudoku, xCord, yCord, candidate) && checkColumn(sudoku, xCord, yCord, candidate)
+	&& checkSquare(sudoku, xCord, yCord, candidate);
 }
 
 function checkRow(sudoku, xCord, yCord, candidate) {
