@@ -1,5 +1,5 @@
 {
-  "name": "Sudoku-solver",
+  "name": "sudoku-solver",
   "version": "0.1.0",
   "main": "window-test.js",
   "scripts": {
