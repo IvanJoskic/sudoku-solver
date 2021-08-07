@@ -75,9 +75,46 @@ function solveHelper(sudoku, xCord, yCord) {
  * @param {*} candidate 
  * @returns 
  */
-function checkFieldCandidateCorectness(sudoku, xCord, yCord, candidate) {
+function checkFieldCandidateCorrectness(sudoku, xCord, yCord, candidate) {
+	if (
+		!checkRow(sudoku, xCord, yCord, candidate) || !checkColumn(sudoku, xCord, yCord, candidate)
+		|| !checkSquare(sudoku, xCord, yCord, candidate)
+	) {
+		return false;
+	} 
+	return true;
+}
+
+function checkRow(sudoku, xCord, yCord, candidate) {
+	if (!checkCandidateNumber(candidate)) {
+		throw new Error(candidate + ' is an invalid number in sudoku.');
+	}
+
+	if (!checkCoordinates(xCord, yCord)) {
+		throw new Error('(' + xCord + ', ' + yCord + ') is an invalid coordinate.');
+	}
+
+	if (!checkSudokuGrid(sudoku)) {
+		throw new Error('Sudoku grid size is invalid.');
+	}
+
 	if (sudoku[xCord].includes(candidate)) {
 		return false;
+	}
+	return true;
+}
+
+function checkColumn(sudoku, xCord, yCord, candidate) {
+	if (!checkCandidateNumber(candidate)) {
+		throw new Error(candidate + ' is an invalid number in sudoku.');
+	}
+
+	if (!checkCoordinates(xCord, yCord)) {
+		throw new Error('(' + xCord + ', ' + yCord + ') is an invalid coordinate.');
+	}
+
+	if (!checkSudokuGrid(sudoku)) {
+		throw new Error('Sudoku grid size is invalid.');
 	}
 
 	for (var i = 0; i < 9; i++) {
@@ -87,6 +124,10 @@ function checkFieldCandidateCorectness(sudoku, xCord, yCord, candidate) {
 		}
 	}
 
+	return true;
+}
+
+function checkSquare(sudoku, xCord, yCord, candidate) {
 	var xStart, yStart;
 	if (xCord < 3) {
 		xStart = 0;
@@ -112,6 +153,31 @@ function checkFieldCandidateCorectness(sudoku, xCord, yCord, candidate) {
 		}
 	}
 
+	return true;
+}
+
+function checkCandidateNumber(candidate) {
+	if (candidate < 1 || candidate > 9) {
+		return false;
+	}
+	return true;
+}
+
+function checkCoordinates(xCord, yCord) {
+	if (xCord < 0 || xCord > 8 || yCord < 0 || yCord > 8) {
+		return false;
+	}
+	return true;
+}
+
+function checkSudokuGrid(sudoku) {
+	if (!Array.isArray(sudoku) || sudoku.length != 9) {
+		return false;
+	}
+
+	if (!Array.isArray(sudoku[0]) || sudoku[0].length != 9) {
+		return false;
+	}
 	return true;
 }
 
